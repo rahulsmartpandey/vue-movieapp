@@ -8,7 +8,7 @@
         <input type="text" v-model="mov.name" placeholder="Enter Movie Name" />
         <br />Category:
         <input type="text" v-model="mov.category" placeholder="Enter Category" />
-        <br />Release Year:<select v-model="mov.year">
+        <div style="margin-top:5px"> Release Year:<select v-model="mov.year">
           <option value="2020" selected>2020</option>
           <option value="2019">2019</option>
           <option value="2018">2018</option>
@@ -16,6 +16,7 @@
           <option value="2016">2016</option>
           <option value="2015">2015</option>
         </select>
+        </div>
         <button @click="addNewMovie()">Add New Movie</button>&nbsp;&nbsp;&nbsp;
         <button @click="resetMovie()">Reset</button>
       </div>
