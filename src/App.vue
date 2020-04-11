@@ -1,26 +1,76 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <h1>List Of BlockBuster Movies</h1>
+    <div>
+      <p>Enter the Details of New Movie</p>
+      <div>
+        Movie Name:
+        <input type="text" v-model="mov.name" placeholder="Enter Movie Name" />
+        <br />Category:
+        <input type="text" v-model="mov.category" placeholder="Enter Category" />
+        <br />Release Year:
+        <input type="text" v-model="mov.year" placeholder="Enter Release year" />&nbsp;
+        <button @click="addNewMovie()">Add New Movie</button>&nbsp;&nbsp;&nbsp;
+        <button @click="resetMovie()">Reset</button>
+      </div>
+    </div>
+
+    <div v-for="(e,index) in listOfMovies" :key="e.id">
+      <h3>Details of Movies #{{index+1}}</h3>
+      <p>ID : {{e.id}}</p>
+      <p>Name : {{e.name}}</p>
+      <p>Category : {{e.category}}</p>
+      <p>Release Year : {{e.year}}</p>
+      <button>Update Details</button>&nbsp;&nbsp;
+      <button @click="deleteMovie(index)">Delete</button>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  name: "App",
+  data() {
+    return {
+      mov: {},
+      movie: { id: 1, name: "Bahubaali", category: "Historic", year: "2018" },
+      listOfMovies: [
+        { id: 2, name: "Bhoot", category: "Horror", year: "2020" },
+        { id: 3, name: "Toilet", category: "Motivational", year: "2019" },
+        { id: 4, name: "DDLJ", category: "Romantic", year: "1999" },
+        { id: 5, name: "Pink", category: "Suspense", year: "2017" },
+        { id: 6, name: "Jolly LLB", category: "Drama", year: "2016" }
+      ]
+    }
+
+    },
+    methods: {
+
+      addNewMovie(){
+        var d= new Date();
+        this.mov.id=d.getMilliseconds();
+        console.log(this.mov)
+        this.listOfMovies.push(this.mov)
+
+      },
+      deleteMovie(index){
+        this.listOfMovies.splice(index,1)
+
+      },
+      resetMovie(){
+      this.mov = {};
+    },
+
+
+    }
+
   }
-}
+
 </script>
 
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
